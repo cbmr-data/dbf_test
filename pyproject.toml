@@ -1,6 +1,6 @@
 [project]
 name = "dbf_test"
-version = "0.0.1"
+version = "2024.4.11"
 dependencies = ["coloredlogs~=15.0.1", "isal~=1.6.0", "rpy2~=3.5.15"]
 
 [project.scripts]
