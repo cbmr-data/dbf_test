@@ -43,61 +43,61 @@ Test statistics appear to be identical between the two versions, but p-values di
 
 ## Usage
 
-usage: dbf_test [-h] [-v] [--threads N] --distance-matrix CSV --genotypes VCF
-                [--dbf-test-script PATH] [--name-mapping CSV]
-                [--name-column-matrix NAME_COLUMN_MATRIX]
-                [--name-column-genotypes NAME_COLUMN_GENOTYPES] [--permissive]
-                [--min-r2 R2] [--min-maf MAF] [--positions] [--head N]
+    usage: dbf_test [-h] [-v] [--threads N] --distance-matrix CSV --genotypes VCF
+                    [--dbf-test-script PATH] [--name-mapping CSV]
+                    [--name-column-matrix NAME_COLUMN_MATRIX]
+                    [--name-column-genotypes NAME_COLUMN_GENOTYPES] [--permissive]
+                    [--min-r2 R2] [--min-maf MAF] [--positions] [--head N]
 
-options:
-  -h, --help            show this help message and exit
-  -v, --version         Display script version
-  --threads N           Number of worker threads used to compute the DBF test
-                        statistic (default: 1)
-  --dbf-test-script PATH
-                        Path to the `DBF_test.R` script; defaults to the same
-                        folder as this script (default: DBF_test.R)
+    options:
+    -h, --help            show this help message and exit
+    -v, --version         Display script version
+    --threads N           Number of worker threads used to compute the DBF test
+                            statistic (default: 1)
+    --dbf-test-script PATH
+                            Path to the `DBF_test.R` script; defaults to the same
+                            folder as this script (default: DBF_test.R)
 
-Input files:
-  --distance-matrix CSV
-                        Path to distance matrix for samples in the VCF file;
-                        the matrix is expected to be comma-separated and have
-                        both row and column names. The matrix must include all
-                        sample names in the VCF but may also contain samples
-                        not found in the VCF (default: None)
-  --genotypes VCF       VCF files containing sample genotypes. Sample names
-                        must either match the names in the distance matrix or a
-                        name mapping file must be supplied with --name-mapping
-                        (default: None)
+    Input files:
+    --distance-matrix CSV
+                            Path to distance matrix for samples in the VCF file;
+                            the matrix is expected to be comma-separated and have
+                            both row and column names. The matrix must include all
+                            sample names in the VCF but may also contain samples
+                            not found in the VCF (default: None)
+    --genotypes VCF       VCF files containing sample genotypes. Sample names
+                            must either match the names in the distance matrix or a
+                            name mapping file must be supplied with --name-mapping
+                            (default: None)
 
-Sample information:
-  --name-mapping CSV    Path to CSV containing a column with the sample names
-                        in the distance matrix and a column containing the
-                        names in the vcf file. If this file is not specified,
-                        then the names in the distance matrix and VCF must be
-                        identical (default: None)
-  --name-column-matrix COLUMN
-                        The name of the column in the --name-mapping file
-                        containing the names used in the --distance-matrix CSV
-                        file (default: SampleID)
-  --name-column-genotypes COLUMN
-                        The name of the column in the --name-mapping file
-                        containing the names used in the --genotypes VCF file
-                        (default: IND_ID)
+    Sample information:
+    --name-mapping CSV    Path to CSV containing a column with the sample names
+                            in the distance matrix and a column containing the
+                            names in the vcf file. If this file is not specified,
+                            then the names in the distance matrix and VCF must be
+                            identical (default: None)
+    --name-column-matrix COLUMN
+                            The name of the column in the --name-mapping file
+                            containing the names used in the --distance-matrix CSV
+                            file (default: SampleID)
+    --name-column-genotypes COLUMN
+                            The name of the column in the --name-mapping file
+                            containing the names used in the --genotypes VCF file
+                            (default: IND_ID)
 
-Site filtering:
-  --permissive          Skip sites containing non-biallelic genotypes or
-                        missing R2 or MAF scores. By default this script will
-                        terminate if such a site is found (default: False)
-  --min-r2 R2           Require a per-site R2 value > the specified value
-                        (default: 0.4)
-  --min-maf MAF         Require a per-site MAF value >= the specified value
-                        (default: 0.01)
+    Site filtering:
+    --permissive          Skip sites containing non-biallelic genotypes or
+                            missing R2 or MAF scores. By default this script will
+                            terminate if such a site is found (default: False)
+    --min-r2 R2           Require a per-site R2 value > the specified value
+                            (default: 0.4)
+    --min-maf MAF         Require a per-site MAF value >= the specified value
+                            (default: 0.01)
 
-Misc:
-  --positions           Include CHROM and POS columns in output (default:
-                        False)
-  --head N              Return only the first N results (default: None)
+    Misc:
+    --positions           Include CHROM and POS columns in output (default:
+                            False)
+    --head N              Return only the first N results (default: None)
 
 
 ## Example
