@@ -305,7 +305,7 @@ def main(argv: list[str] = sys.argv[1:]) -> int:
     setup_logging("%(asctime)s %(levelname)s %(message)s")
 
     # rpy2 by defaults repeatedly logs information about initialization
-    logging.getLogger("rpy2").setLevel(logging.WARN)
+    logging.getLogger("rpy2").setLevel(logging.WARNING)
     # TODO: Capture standard/error messages via
     # rpy2.rinterface_lib.callbacks.consolewrite_print = lambda _: None
     # rpy2.rinterface_lib.callbacks.consolewrite_warnerror = lambda _: None
