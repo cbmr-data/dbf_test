@@ -16,8 +16,8 @@ SOURCES = (
 
 class Requirements:
     NOX = "nox~=2023.4.22"
-    PYRIGHT = "pyright==1.1.358"
-    RUFF = "ruff==0.3.5"
+    PYRIGHT = "basedpyright==1.10.4"
+    RUFF = "ruff==0.4.2"
 
 
 @nox.session
@@ -40,4 +40,4 @@ def typing(session: nox.Session) -> None:
     session.install("-e", ".")
     session.install(Requirements.NOX)
     session.install(Requirements.PYRIGHT)
-    session.run("pyright", *SOURCES)
+    session.run("basedpyright", *SOURCES)
