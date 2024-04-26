@@ -30,7 +30,7 @@ from typing import (
     NamedTuple,
 )
 
-from dbf_test import __VERSION_STR__
+from dbf_test import __version_str__
 
 
 class Args(NamedTuple):
@@ -59,7 +59,7 @@ class Args(NamedTuple):
         parser.add_argument(
             "-v",
             "--version",
-            version=__VERSION_STR__,
+            version=__version_str__,
             action="version",
             help="Display script version",
         )

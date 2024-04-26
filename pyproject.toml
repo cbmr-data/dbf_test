@@ -1,64 +1,63 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "dbf_test"
-version = "2024.4.11"
+dynamic = ["version"]
+
+authors = [{ name = "Mikkel Schubert", email = "MikkelSch@gmail.com" }]
+license = { file = "LICENSE" }
+description = "Parallelized wrapper for running DBF Test on VCFs containing biallelic variants"
+readme = { file = "README.md", content-type = "text/markdown" }
+
+requires-python = ">=3.10"
 dependencies = ["coloredlogs~=15.0.1", "isal~=1.6.0", "rpy2~=3.5.15"]
+
+[project.urls]
+Homepage = "https://github.com/cbmr-data/dbf_test"
+Repository = "https://github.com/cbmr-data/dbf_test.git"
+Issues = "https://github.com/cbmr-data/dbf_test/issues"
 
 [project.scripts]
 dbf_test = "dbf_test.__main__:main"
 
-[tool.setuptools.packages.find]
-include = ["dbf_test"]
+
+[tool.setuptools]
+packages = ["dbf_test"]
+
+[tool.setuptools.dynamic]
+version = { attr = "dbf_test.__version_str__" }
+
 
 [tool.pyright]
+# Used since `strict = [...]` prevents individual `reportX` settings:
+include = ["dbf_test", "typings", "noxfile.py"]
 typeCheckingMode = "strict"
+stubPath = "typings"
 
 [tool.ruff]
 target-version = "py310"
 
 [tool.ruff.lint]
-select = [
-    "A",    # flake8-builtins
-    "ANN",  # flake8-annotations
-    "B",    # flake8-bugbear
-    "BLE",  # flake8-blind-except
-    "C4",   # flake8-comprehensions
-    "DTZ",  # flake8-datetimez
-    "E",    # Error
-    "EXE",  # flake8-executable
-    "F",    # Pyflakes
-    "FA",   # flake8-future-annotations
-    "FBT",  # flake8-boolean-trap
-    "FIX",  # flake8-fixme
-    "FLY",  # flynt
-    "G",    # flake8-logging-format
-    "I",    # isort
-    "INP",  # flake8-no-pep420
-    "ISC",  # flake8-implicit-str-concat
-    "N",    # pep8-naming
-    "PERF", # Perflint
-    "PGH",  # pygrep-hooks
-    "PIE",  # flake8-pie
-    "PL",   # Pylint
-    "PT",   # flake8-pytest-style
-    "PTH",  # flake8-use-pathlib -- long term goal
-    "PYI",  # flake8-pyi
-    "Q",    # flake8-quotes
-    "RET",  # flake8-return
-    "RSE",  # flake8-raise
-    "RUF",  # Ruff-specific rules
-    "SIM",  # flake8-simplify
-    "SLOT", # flake8-slots
-    "T10",  # flake8-debugger
-    "TCH",  # flake8-type-checking
-    "TID",  # flake8-tidy-imports
-    "UP",   # pyupgrade
-    "W",    # pycodestyle warnings
-    "YTT",  # flake8-2020
-]
+select = ["ALL"]
 
 ignore = [
+    # Rules either deemed too burdonsome to implement or not useful
+    "C90", # mccabe -- Complexity measures not deemed useful
+    "COM", # flake8-commas -- Formatting handled by ruff/black
+    "D",   # pydocstyle
+    "ERA", # eradicate
+    "EM",  # flake8-errmsg
+    "T20", # flake8-print
+    "TD",  # flake8-todos
+    "FIX", # flake8-fixme
+    "S",   # flake8-bandit
+    # Individual rules deemed too burdonsome or not useful
     "ANN101", # missing-type-self -- Missing type annotation for `self` in method
     "ANN102", # missing-type-cls -- Missing type annotation for `cls` in classmethod
+    "S603",   # subprocess-without-shell-equals-true
+    "TRY003", # raise-vanilla-args
     # Disabled due to too many false positives
     "PLR2004", # magic-value-comparison -- Magic value used in comparison
     # Disabled due to personal style preferences
@@ -72,10 +71,5 @@ ignore = [
     # Disabled due to conflict with `format` command
     "ISC001", # single-line-implicit-string-concatenation
     # Complexity warnings disabled for now
-    "PLR0904", # too-many-public-methods
-    "PLR0911", # too-many-return-statements
-    "PLR0912", # too-many-branches
-    "PLR0913", # too-many-arguments
-    "PLR0915", # too-many-statements
-    "PLR0916", # too-many-boolean-expressions
+    "PLR09", # too-many-*
 ]
